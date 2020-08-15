@@ -1,46 +1,27 @@
 import request from '../ulits/request'
 Page({
 
+
     /**
      * 页面的初始数据
      */
     data: {
-        swiperList: [],
         courseList: [],
-        videoList: []
-
+        levelArr:['','初级课程','中级课程','高级课程',]
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        this.getSwiperList()
-        this.getCourseList()
-        this.getVideoList()
+        this.getCourse()
     },
-    async getSwiperList() {
+    async getCourse() {
         let data = await request({
-            url: '/api/home/swipers',
-        })
-        this.setData({
-            swiperList: data
-        })
-    },
-    async getCourseList() {
-        let data = await request({
-            url: '/api/home/course'
+            url: "/api/course/list"
         })
         this.setData({
             courseList: data
-        })
-    },
-    async getVideoList() {
-        let data = await request({
-            url: '/api/home/video',
-        })
-        this.setData({
-            videoList: data
         })
     },
     /**
