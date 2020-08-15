@@ -1,10 +1,12 @@
-// pages/home/home.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    swiperList: [],
+    courseList:[],
+    videoList:[]
 
   },
 
@@ -12,9 +14,49 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getSwiperList()
+    this.getCourseList()
+    this.getVideoList()
   },
-
+  getSwiperList() {
+    wx.request({
+      url: 'http://localhost:3000/api/home/swipers',
+      success:(res)=>{
+        let {message,status} = res.data
+        if(status===0){
+          this.setData({
+            swiperList:message
+          })
+        }
+      }
+    })
+  },
+  getCourseList() {
+    wx.request({
+      url: 'http://localhost:3000/api/home/course ',
+      success:(res)=>{
+        let {message,status} = res.data
+        if(status===0){
+          this.setData({
+            courseList:message
+          })
+        }
+      }
+    })
+  },
+  getVideoList() {
+    wx.request({
+      url: 'http://localhost:3000/api/home/video',
+      success:(res)=>{
+        let {message,status} = res.data
+        if(status===0){
+          this.setData({
+            videoList:message
+          })
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
